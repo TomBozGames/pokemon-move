@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Move</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="icon" type="image/png" href="./assets/images/app-icon.png">
+    <link rel="apple-touch-icon" href="./assets/images/app-icon.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Pokémon Move">
+    <meta name="application-name" content="Pokémon Move">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&family=Quicksand:wght@300..700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <audio src="./assets/audio/music.mp3" loop data-background-music></audio>
+
+    <div class="header card">
+        <div class="header__timer">Temps restant : <span class="header__timer-value" data-timer>--</span></div>
+        <div class="header__chain" data-active-line></div>
+        <div class="header__count" data-progress-count>0 / 60</div>
+        <div class="header__progress">
+            <div class="header__progress-bar" data-progress-bar></div>
+        </div>
+    </div>
+
+    <div class="grid card" data-grid></div>
+
+    <div class="footer card">
+        <button class="btn btn--primary" type="button" data-add-cube>
+            <img src="./assets/images/ico-cube.svg" alt="" data-add-icon>
+            <span data-add-label>Cubes</span>
+        </button>
+        <button class="btn btn--secondary" type="button" data-toggle-pokedex>
+            <img src="./assets/images/ico-pokeball.svg" alt="" data-view-icon>
+            <span data-view-label>Pokédex</span>
+        </button>
+    </div>
+
+</body>
+
+</html>

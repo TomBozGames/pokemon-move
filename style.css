@@ -1,0 +1,289 @@
+:root {
+    --color-primary-25: #FFFAF5;
+    --color-primary-50: #FFF1E6;
+    --color-primary-100: #FFD9B8;
+    --color-primary-200: #FFC08A;
+    --color-primary-300: #FF9E4A;
+    --color-primary-400: #FF8F2E;
+    --color-primary-500: #FF7700;
+    --color-primary-600: #D16200;
+    --color-primary-700: #A34C00;
+    --color-primary-800: #753700;
+    --color-primary-900: #472100;
+    --color-primary-950: #1A0C00;
+    --color-secondary-25: #F6FAFF;
+    --color-secondary-50: #E6F3FF;
+    --color-secondary-100: #B8DEFF;
+    --color-secondary-200: #8AC8FF;
+    --color-secondary-300: #4AABFF;
+    --color-secondary-400: #2E9DFF;
+    --color-secondary-500: #0088FF;
+    --color-secondary-600: #0070D1;
+    --color-secondary-700: #0057A3;
+    --color-secondary-800: #003F75;
+    --color-secondary-900: #002647;
+    --color-secondary-950: #000E1A;
+
+    --box-shadow: 0 3px 6px 0 #A34C0026;
+
+    --space-1: 0.25rem; /* 4px */
+    --space-2: 0.5rem; /* 8px */
+    --space-3: 0.75rem; /* 12px */
+    --space-4: 1rem; /* 16px */
+    --space-5: 1.25rem; /* 20px */
+    --space-6: 1.5rem; /* 24px */
+    --space-7: 1.75rem; /* 30px */
+    --space-8: 2rem; /* 36px */
+
+    --font-size-sm: 0.75rem; /* 12px */
+    --font-size-base: 1rem; /* 16px */
+    --font-size-md: 1.25rem; /* 20px */
+    --font-size-lg: 2rem; /* 32px */
+
+    --border-base: 0.0625rem; /* 1px */
+    --border-md: 0.125rem; /* 2px */
+    --border-lg: 0.25rem; /* 4px */
+
+    --radius-base: 0.25rem; /* 4px */
+    --radius-md: 0.5rem; /* 8px */
+    --radius-lg: 1.5rem; /* 24px */
+    --radius-full: 999rem;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    padding: var(--space-8) var(--space-4);
+    flex-direction: column;
+    gap: var(--space-4);
+    justify-content: space-between;
+
+    background: var(--color-primary-50);
+    color: var(--color-primary-800);
+    font-family: Quicksand, sans-serif;
+    font-size: var(--font-size-base);
+    font-weight: 700;
+}
+
+.card {
+    display: flex;
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    background: var(--color-primary-25);
+    box-shadow: var(--box-shadow);
+}
+
+.header {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.header__timer {
+    display: flex;
+    padding: var(--space-2) var(--space-3);
+    
+    border-radius: var(--radius-md);
+    background: var(--color-primary-50);
+}
+
+.header__timer-value {
+    color: var(--color-primary-500);
+}
+
+.header__chain {
+    display: flex;
+    height: 3.5rem;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    gap: var(--space-2);
+}
+
+.header__arrow {
+    width: 1.75rem;
+}
+
+.header__arrow--active {
+    color: var(--color-primary-500);
+}
+
+.header__count {
+    margin-bottom: -0.25rem;
+}
+
+.header__progress {
+    display: flex;
+    height: 1.5rem;
+    align-self: stretch;
+
+    border-radius: var(--radius-full);
+    border: var(--border-lg) solid var(--color-primary-50);
+    background: var(--color-primary-100);
+}
+
+.header__progress-bar {
+    width: 0%;
+
+    border-radius: var(--radius-full);
+    background: linear-gradient(90deg, var(--color-primary-500) 0%, var(--color-primary-300) 100%);
+}
+
+.grid {
+    display: grid;
+    gap: var(--space-2);
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: center;
+    overflow-y: auto;
+    min-height: 0;
+    align-content: start;
+}
+
+.cube {
+    appearance: none;
+    position: relative;
+    display: flex;
+    height: 100%;
+    aspect-ratio: 1;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: var(--radius-md);
+    border: var(--border-md) dotted var(--color-primary-100);
+    background: var(--color-primary-50);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 105%;
+    color: var(--color-primary-200);
+    font-family: Quicksand, sans-serif;
+    font-size: var(--font-size-base);
+    font-weight: 700;
+    cursor: default;
+}
+
+.cube--seen {
+    border: var(--border-md) solid var(--color-primary-100);
+    background-image: var(--pokemon-image);
+    filter: grayscale();
+}
+
+.cube--obtained {
+    border: var(--border-md) solid var(--color-secondary-300);
+    background-image: var(--pokemon-image);
+    filter: brightness(110%);
+}
+
+.cube--stamp {
+    border: var(--border-md) solid var(--color-secondary-300);
+    background-image: var(--pokemon-image);
+    filter: brightness(110%);
+}
+
+.cube--committed {
+    filter: grayscale(1);
+    opacity: 0.5;
+}
+
+.cube--pending {
+    outline: var(--border-lg) solid var(--color-primary-500);
+    outline-offset: calc(var(--border-md) * -1);
+}
+
+.cube--selected {
+    outline: var(--border-lg) solid var(--color-primary-500);
+    outline-offset: calc(var(--border-md) * -1);
+}
+
+.cube--locked {
+    cursor: not-allowed;
+}
+
+.cube__number {
+    pointer-events: none;
+}
+
+.grid--pokedex .cube {
+    border-style: solid;
+    cursor: pointer;
+}
+
+.grid--pokedex .cube--locked {
+    cursor: not-allowed;
+}
+
+.grid--placing .cube {
+    cursor: pointer;
+}
+
+.grid--placing .cube--committed {
+    cursor: default;
+}
+
+.footer {
+    justify-content: space-evenly;
+    gap: var(--space-2);
+}
+
+.btn {
+    display: flex;
+    height: 3rem;
+    max-width: 12rem;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-2);
+    flex: 1;
+
+    border-radius: var(--radius-full);
+
+    color: var(--color-secondary-25);
+    text-align: center;
+    font-family: Quicksand, sans-serif;
+    font-size: var(--font-size-base);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn__image--hidden {
+    display: none;
+}
+
+.btn img {
+    width: 1.25rem;
+}
+
+.btn--primary {
+    border: var(--border-md) solid var(--color-primary-200);
+    background: linear-gradient(90deg, var(--color-primary-500) 0%, var(--color-primary-300) 100%);
+}
+
+.btn--secondary {
+    border: var(--border-md) solid var(--color-secondary-100);
+    background: linear-gradient(90deg, var(--color-secondary-400) 0%, var(--color-secondary-200) 100%);
+}
+
+@media (min-width: 600px) {
+    html {
+        font-size: 24px;
+    }
+
+    .grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
