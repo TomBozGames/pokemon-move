@@ -854,3 +854,12 @@ document.addEventListener("visibilitychange", () => {
         }
     }
 });
+
+// Détecter le changement d'orientation ou le redimensionnement de l'écran
+window.addEventListener("resize", () => {
+    // On vérifie si la fonction qui dessine la grille existe
+    // Remplace "renderGrid" par le VRAI nom de ta fonction si elle s'appelle autrement
+    if (typeof renderGrid === "function") {
+        renderGrid(); 
+    }
+});
