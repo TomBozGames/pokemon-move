@@ -822,32 +822,22 @@ function resetGame() {
     window.location.reload();
 }
 
-// On sauvegarde le lien de ta musique qui est défini dans ton HTML
+// On sauvegarde le lien de la musique défini dans le HTML
 const musicSrc = elements.backgroundMusic ? elements.backgroundMusic.src : "";
-// Une variable pour retenir la seconde exacte où le joueur a quitté
 let savedTime = 0;
 
 document.addEventListener("visibilitychange", () => {
     if (!elements.backgroundMusic) return;
 
     if (document.hidden) {
-        // 1. On sauvegarde l'endroit où la musique était rendue
         savedTime = elements.backgroundMusic.currentTime;
-        // 2. On la met en pause
         elements.backgroundMusic.pause();
-        // 3. On VIDE la source. Le widget Spotify disparaît INSTANTANÉMENT de l'écran verrouillé !
         elements.backgroundMusic.src = "";
     } else {
-        // Le joueur est de retour sur l'application !
         if (musicHasStarted) {
-            // 1. On remet la source d'origine
             elements.backgroundMusic.src = musicSrc;
-            // 2. On force le rechargement du fichier
             elements.backgroundMusic.load();
-            // 3. On replace le curseur là où le joueur était rendu
             elements.backgroundMusic.currentTime = savedTime;
-            
-            // 4. On relance la musique
             elements.backgroundMusic.play().catch((error) => {
                 console.log("Le navigateur a bloqué la reprise automatique :", error);
             });
@@ -855,19 +845,27 @@ document.addEventListener("visibilitychange", () => {
     }
 });
 
+// GESTION DE L'ORIENTATION ET DU RENDU
 let orientationTimeout;
 
 function handleLayoutChange() {
+    // Si on est en paysage, on ne fait rien (le CSS s'occupe de mettre le message)
     if (window.innerWidth > window.innerHeight) return;
 
+    // Si on est en portrait, on force un recalcul propre pour détruire le zoom
+    renderApp();
+
+    // Double sécurité : on refait un rendu après 250ms pour stabiliser sur iPad
     clearTimeout(orientationTimeout);
     orientationTimeout = setTimeout(() => {
-        if (typeof renderGrid === "function") renderGrid();
+        renderApp();
     }, 250);
 }
 
 window.addEventListener("resize", handleLayoutChange);
 window.addEventListener("orientationchange", handleLayoutChange);
 document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "visible") handleLayoutChange();
+    if (document.visibilityState === "visible") {
+        handleLayoutChange();
+    }
 });
