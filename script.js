@@ -855,15 +855,8 @@ document.addEventListener("visibilitychange", () => {
     }
 });
 
-// On écoute le changement de taille ET le changement d'orientation
-["resize", "orientationchange"].forEach(eventType => {
-    window.addEventListener(eventType, () => {
-        // On met un mini délai (100 millisecondes) pour laisser le temps 
-        // à la tablette de finir sa rotation avant de recalculer
-        setTimeout(() => {
-            if (typeof renderGrid === "function") {
-                renderGrid();
-            }
-        }, 100);
-    });
+window.addEventListener("resize", () => {
+    if (typeof renderGrid === "function") {
+        renderGrid();
+    }
 });

@@ -287,3 +287,15 @@ body {
         grid-template-columns: repeat(6, 1fr);
     }
 }
+
+/* Quand la tablette passe en mode paysage... */
+@media (orientation: landscape) {
+    body {
+        /* La largeur max en paysage devient égale à la hauteur de l'écran, 
+           ce qui correspond à sa largeur en mode portrait ! */
+        width: 100vh !important; 
+        max-width: 100vw;
+        margin: 0 auto;
+        height: 100vh;
+    }
+}
