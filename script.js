@@ -1,7 +1,7 @@
 // Cette clé est le nom utilisé dans localStorage pour sauvegarder la partie.
 const STORAGE_KEY = "pokemonMoveSave";
 
-const TOTAL_CUBES = 60;
+const TOTAL_CUBES = 48;
 const WEEK_IN_MS = 7 * 24 * 60 * 60 * 1000;
 
 // Tous les éléments HTML que le script doit lire ou modifier.
@@ -821,3 +821,36 @@ function resetGame() {
     localStorage.removeItem(STORAGE_KEY);
     window.location.reload();
 }
+
+// On sauvegarde le lien de ta musique qui est défini dans ton HTML
+const musicSrc = elements.backgroundMusic ? elements.backgroundMusic.src : "";
+// Une variable pour retenir la seconde exacte où le joueur a quitté
+let savedTime = 0;
+
+document.addEventListener("visibilitychange", () => {
+    if (!elements.backgroundMusic) return;
+
+    if (document.hidden) {
+        // 1. On sauvegarde l'endroit où la musique était rendue
+        savedTime = elements.backgroundMusic.currentTime;
+        // 2. On la met en pause
+        elements.backgroundMusic.pause();
+        // 3. On VIDE la source. Le widget Spotify disparaît INSTANTANÉMENT de l'écran verrouillé !
+        elements.backgroundMusic.src = "";
+    } else {
+        // Le joueur est de retour sur l'application !
+        if (musicHasStarted) {
+            // 1. On remet la source d'origine
+            elements.backgroundMusic.src = musicSrc;
+            // 2. On force le rechargement du fichier
+            elements.backgroundMusic.load();
+            // 3. On replace le curseur là où le joueur était rendu
+            elements.backgroundMusic.currentTime = savedTime;
+            
+            // 4. On relance la musique
+            elements.backgroundMusic.play().catch((error) => {
+                console.log("Le navigateur a bloqué la reprise automatique :", error);
+            });
+        }
+    }
+});
