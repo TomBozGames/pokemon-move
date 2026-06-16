@@ -288,14 +288,17 @@ body {
     }
 }
 
-/* Quand la tablette passe en mode paysage... */
+/* S'active sur n'importe quel appareil plus large que long */
 @media (orientation: landscape) {
-    body {
-        /* La largeur max en paysage devient égale à la hauteur de l'écran, 
-           ce qui correspond à sa largeur en mode portrait ! */
-        width: 100vh !important; 
-        max-width: 100vw;
-        margin: 0 auto;
-        height: 100vh;
+    body::before {
+        content: "🔄  Veuillez changer l'orientation de votre appareil.";
+        position: fixed;
+        top: 0; left: 0; 
+        width: 100vw; height: 100vh;
+        background: var(--color-primary-950); color: var(--color-primary-25);
+        display: flex; align-items: center; justify-content: center;
+        font-family: Quicksand; font-size: var(--font-size-md); text-align: center;
+        padding: var(--space-8); box-sizing: border-box;
+        z-index: 99999; /* Passe par-dessus tout le jeu */
     }
 }

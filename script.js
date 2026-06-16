@@ -855,8 +855,19 @@ document.addEventListener("visibilitychange", () => {
     }
 });
 
-window.addEventListener("resize", () => {
-    if (typeof renderGrid === "function") {
-        renderGrid();
-    }
+let orientationTimeout;
+
+function handleLayoutChange() {
+    if (window.innerWidth > window.innerHeight) return;
+
+    clearTimeout(orientationTimeout);
+    orientationTimeout = setTimeout(() => {
+        if (typeof renderGrid === "function") renderGrid();
+    }, 250);
+}
+
+window.addEventListener("resize", handleLayoutChange);
+window.addEventListener("orientationchange", handleLayoutChange);
+document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") handleLayoutChange();
 });
